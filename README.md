@@ -14,3 +14,7 @@ ot_remap.py
 nearestneighbour.m
   Calculates nearest-neighbor distances in Matlab, from a set of 3-D particle centers.
   First used here: biorxiv.org/content/early/2017/05/18/139543
+
+ot_rot-ps.py
+  Rotational power spectrum analysis of a 2-D image.
+  First used here: 
