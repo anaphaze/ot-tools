@@ -9,12 +9,12 @@ Thanks to the students who have written or tested these scripts.
 
 ot_remap.py
   Creates a synthetic tomogram by remapping a class average into the salient position in the tomogram.
-  First used here: biorxiv.org/content/early/2017/05/18/139543
+  First used here: https://www.ncbi.nlm.nih.gov/pubmed/29742050
 
 nearestneighbour.m
   Calculates nearest-neighbor distances in Matlab, from a set of 3-D particle centers.
-  First used here: biorxiv.org/content/early/2017/05/18/139543
+  First used here: https://www.ncbi.nlm.nih.gov/pubmed/29742050
 
 ot_rot-ps.py
   Rotational power spectrum analysis of a 2-D image.
-  First used here: 
+  First used here: https://www.biorxiv.org/content/early/2018/04/11/299487
