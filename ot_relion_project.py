@@ -2,8 +2,8 @@
 # ot_relion_project.py -- average the central N slices in a large number of tomos
 #
 # If you find this script useful for your work, please cite:
-# Cai, 2018, PNAS, Cryo-ET reveals the macromolecular reorganisation of S. pombe mitotic chromosomes in vivo
-# https://www.ncbi.nlm.nih.gov/pubmed/########
+# Cai, 2018, PNAS, Cryo-ET reveals the macromolecular reorganization of S. pombe mitotic chromosomes in vivo
+# https://www.ncbi.nlm.nih.gov/pubmed/30297429
 #
 # Dependencies: IMOD
 # Created: 20170713 (Lu Gan)
