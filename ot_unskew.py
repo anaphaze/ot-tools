@@ -2,8 +2,8 @@
 # ot_unskew.py -- Compensate .mod coordinates for compression artifacts
 #
 # If you find this script useful for your work, please cite:
-# Cai, 2018, PNAS, Cryo-ET reveals the macromolecular reorganisation of S. pombe mitotic chromosomes in vivo
-# https://www.ncbi.nlm.nih.gov/pubmed/########
+# Cai, 2018, PNAS, Cryo-ET reveals the macromolecular reorganization of S. pombe mitotic chromosomes in vivo
+# https://www.ncbi.nlm.nih.gov/pubmed/30297429
 #
 # Dependencies: python 2.7, IMOD
 # Created: 20170715 (Lu Gan)
