@@ -2,7 +2,7 @@
 # ot_remap.py -- remap subtomos into a synthetic tomogram
 #
 # If you find this script useful for your work, please cite:
-# Cai, 2018, MBoC 29, p1652: "Natural chromatin is heterogeneous and self associates in vitro"
+# Cai, 2018, MBoC 29, p1652: "Natural chromatin is heterogeneous and self-associates in vitro"
 # https://www.ncbi.nlm.nih.gov/pubmed/29742050
 #
 # Dependencies: EMAN2, IMOD, Bsoft
@@ -10,6 +10,7 @@
 # Revised: 20161227 (LG) merged scripts, increased user-friendliness
 # Revised: 20161231 (SC & LG) e2proc3d uses SPIDER Euler convention; read _data.star & class ID
 # Revised: 20180117 (LG) added origin shifts
+# Revised: 20190509 (LG) ignore # comments; fixed range(sub1,sub2) out of index bug
 #
 # Based on Tanmay Bharat's relion_2Dto3D_star.py:
 # http://www.sciencedirect.com/science/article/pii/S0969212615002798
@@ -85,7 +86,7 @@ def read_relion_header(filename):
       continue
 
     fields = line.split()
-    if fields[0] == 'data_' or fields[0] == 'loop_':  # skip the data_ and loop_ lines
+    if fields[0] == 'data_' or fields[0] == 'loop_' or fields[0] == '#':  # skip the data_, loop_, # lines
       continue
 
     i= i+1
@@ -121,11 +122,11 @@ def read_relion_header(filename):
 
 
 #---------- BEGIN Transformation thread function -----------
-def clipadd(j):
+def clipadd(j):                # j indexes each core
    sub1=j*num_task             # first iter index
    sub2=(j+1)*num_task-1       # last iter index
    for i in range(sub1,sub2):
-      if (i == sub1 and i < num_line):     # Initialize 1st sum, making sure not to overcount 
+      if (i == sub1 and i < (num_line-1)):     # Initialize 1st sum, making sure not to overcount
 # Rotate i == sub1
          a=float(rot[i])
          b=float(tlt[i])
@@ -134,6 +135,7 @@ def clipadd(j):
          os.system('bimg -rescale 0,5.2 tmp_ema_{0:05d}.mrc tmp_sca_{0:05d}.mrc'.format(i))
          os.system('newstack -q -mode 1 tmp_sca_{0:05d}.mrc tmp_mod_{0:05d}.mrc'.format(i))
          os.system('bimg -rescale 0,5.2 tmp_mod_{0:05d}.mrc tmp_rot_{0:05d}.mrc'.format(i))
+#        os.system('touch ycount%05d' % i)  # Uncomment for diagnostics
 
          a=float(rot[i+1])
          b=float(tlt[i+1])
@@ -142,6 +144,7 @@ def clipadd(j):
          os.system('bimg -rescale 0,5.2 tmp_ema_{0:05d}.mrc tmp_sca_{0:05d}.mrc'.format(i+1))
          os.system('newstack -q -mode 1 tmp_sca_{0:05d}.mrc tmp_mod_{0:05d}.mrc'.format(i+1))
          os.system('bimg -rescale 0,5.2 tmp_mod_{0:05d}.mrc tmp_rot_{0:05d}.mrc'.format(i+1))
+#        os.system('touch ycount%05d' % (i+1))  # Uncomment for diagnostics
 
 # Resize i == sub1
          os.system('clip resize -m 1 -ox %s -oy %s -oz %s tmp_rot_%05d.mrc tmp_siz_%05d.mrc' % (dimX, dimY, dimZ, i, i))
@@ -165,8 +168,8 @@ def clipadd(j):
          os.system('clip add -m 1 tmp_tra_%05d.mrc tmp_tra_%05d.mrc sum_%05d_%05d.mrc' % (i, i+1, i, i+1))
          os.system('rm -f tmp_tra_%05d.mrc tmp_tra_%05d.mrc' % (i, i+1))
 
-      elif (i > sub1 and i < (num_line-1) and i < num_line):  # Sequentially append to previous sums; don't overcount
-# Rotate i > sub1 
+      elif (i > sub1 and i < (num_line-1)):  # Sequentially append to previous sums; don't overcount
+# Rotate i > sub1
          a=float(rot[i+1])
          b=float(tlt[i+1])
          c=float(psi[i+1])
@@ -174,7 +177,7 @@ def clipadd(j):
          os.system('bimg -rescale 0,5.2 tmp_ema_{0:05d}.mrc tmp_sca_{0:05d}.mrc'.format(i+1))
          os.system('newstack -q -mode 1 tmp_sca_{0:05d}.mrc tmp_mod_{0:05d}.mrc'.format(i+1))
          os.system('bimg -rescale 0,5.2 tmp_mod_{0:05d}.mrc tmp_rot_{0:05d}.mrc'.format(i+1))
-
+#        os.system('touch zcount%05d' % (i+1))  # Uncomment for diagnostics
 # Resize i > sub1
          os.system('clip resize -m 1 -ox %s -oy %s -oz %s tmp_rot_%05d.mrc tmp_siz_%05d.mrc' % (dimX, dimY, dimZ, i+1, i+1))
          os.system('rm -f tmp_ema_{0:05d}.mrc tmp_sca_{0:05d}.mrc tmp_mod_{0:05d}.mrc tmp_rot_{0:05d}.mrc'.format(i+1))
@@ -200,7 +203,6 @@ XextCol,YextCol,ZextCol,RotCol,TiltCol,PsiCol,ClassCol,XoriCol,YoriCol,ZoriCol =
 # Read the 3D starfile, ignoring the header items;  "grep -v" is an inverse selection
 grepline = 'grep ' + 'Tomograms ' + name_star + '| grep -v "#" | grep -v "loop" | grep -v "data" | awk "NF"  > temp.txt'
 os.system(grepline)
-
 
 ### Make database of only the relevant values in memory
 data = csv.reader(open('temp.txt', 'r'), delimiter=" ", skipinitialspace = True)
@@ -238,6 +240,7 @@ sizadd_time1 = time.time()
 if __name__ == '__main__':
       pool = multiprocessing.Pool(num_jobs)
       results = pool.map(clipadd, range(num_jobs))
+#     results = pool.map(clipadd, range(17,20))  #Uncomment for diagnostics
 
 sizadd_time2 = time.time()
 name_cls = int(name_cls)
@@ -246,9 +249,9 @@ os.system('alterheader syn_pos_cls%02d.mrc -org 0,0,0' % (name_cls))
 # Uncomment to get synthetic tomo w/ inverted contrast:
 os.system('bimg -invert syn_pos_cls%02d.mrc syn_neg_cls%02d.mrc' % (name_cls, name_cls))
 
-
 os.system('rm -f temp.txt *.mrc~ sum_*_*.mrc')  # Comment out for diagnostics
 #---------- END Parallel work ------------------------------
+
 
 #---------- Sum all to compare with tomo --------------------
 os.system('clip add -m 1 syn_pos*mrc syn_sum_pos.mrc')
