@@ -32,5 +32,5 @@ Rotational power spectrum analysis of a 2-D image.<br />
 First use: https://www.ncbi.nlm.nih.gov/pubmed/30504246
 
 ##### ot_unskew.py
-Compensate .mod coordinates for compression artifacts<br />
+Compensate .mod coordinates for compression artifacts.<br />
 First use: https://www.ncbi.nlm.nih.gov/pubmed/30297429
