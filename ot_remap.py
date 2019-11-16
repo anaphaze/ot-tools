@@ -2,12 +2,12 @@
 # ot_remap.py -- remap subtomos into a synthetic tomogram
 #
 # If you find this script useful for your work, please cite:
-# Cai, 2018, MBoC 29, p1652: "Natural chromatin is heterogeneous and self-associates in vitro"
+# Cai, 2018, MBoC, Natural chromatin is heterogeneous and self-associates in vitro
 # https://www.ncbi.nlm.nih.gov/pubmed/29742050
 #
 # Dependencies: EMAN2, IMOD, Bsoft
 # Created: 20161021 (Shujun Cai)
-# Revised: 20161227 (LG) merged scripts, increased user-friendliness
+# Revised: 20161227 (Lu Gan) merged scripts, increased user-friendliness
 # Revised: 20161231 (SC & LG) e2proc3d uses SPIDER Euler convention; read _data.star & class ID
 # Revised: 20180117 (LG) added origin shifts
 # Revised: 20190509 (LG) ignore # comments; fixed range(sub1,sub2) out of index bug
