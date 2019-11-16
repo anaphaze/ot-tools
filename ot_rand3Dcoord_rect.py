@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# ot_rand3Dcoord_rect.py -- Create randomly distributed distribution of points in a rectangular box
+# ot_rand3Dcoord_rect.py -- Create random distribution of points with a minimum inter-particle distance within a rectangular box
 #
 # If you find this script useful for your work, please cite:
 # Cai, 2018, MBoC, Natural chromatin is heterogeneous and self-associates in vitro
