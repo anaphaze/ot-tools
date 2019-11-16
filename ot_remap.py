@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# ot_remap.py -- remap subtomos into a synthetic tomogram
+# ot_remap.py -- creates a remapped model from a RELION subtomogram average
 #
 # If you find this script useful for your work, please cite:
 # Cai, 2018, MBoC, Natural chromatin is heterogeneous and self-associates in vitro
