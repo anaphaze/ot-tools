@@ -3,7 +3,7 @@
 # Created: 20171214 (Lu Gan)
 #
 # If you find this script useful for your work, please cite:
-# Cai, 2018, MBoC 29, p1652: "Natural chromatin is heterogeneous and self-associates in vitro"
+# Cai, 2018, MBoC, Natural chromatin is heterogeneous and self-associates in vitro
 # https://www.ncbi.nlm.nih.gov/pubmed/29742050
 #
 import random, os, sys
