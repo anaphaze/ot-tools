@@ -2,12 +2,13 @@
 # ot_rot-ps.py -- Generate a rotational correlation and power spectrum from an image
 #
 # If you find this script useful for your work, please cite:
-# Ng, 2018, A multi-scale model of the yeast chromosome-segregation system
-# https://www.biorxiv.org/content/early/2018/04/11/299487
+# Ng, 2019, JCB, "Electron cryotomography analysis of Dam1C/DASH at the kinetochore–spindle interface in situ"
+# https://www.ncbi.nlm.nih.gov/pubmed/30504246
 #
 # Dependencies: EMAN2
-# Created: 20170510 (LG)
-# Revised: 20171211 tightend comments (LG)
+# Created: 20170510 (Lu Gan)
+# Revised: 20171211 tightened comments (LG)
+# Revised: 20191116 updated reference (LG)
 #
 import os
 from EMAN2 import *
