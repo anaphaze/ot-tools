@@ -2,7 +2,7 @@
 # ot_rot-ps.py -- Generate a rotational correlation and power spectrum from an image
 #
 # If you find this script useful for your work, please cite:
-# Ng, 2019, JCB, "Electron cryotomography analysis of Dam1C/DASH at the kinetochore–spindle interface in situ"
+# Ng, 2019, JCB, Electron cryotomography analysis of Dam1C/DASH at the kinetochore–spindle interface in situ
 # https://www.ncbi.nlm.nih.gov/pubmed/30504246
 #
 # Dependencies: EMAN2
