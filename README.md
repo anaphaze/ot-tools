@@ -13,7 +13,7 @@ First use: https://www.ncbi.nlm.nih.gov/pubmed/29742050
 
 ##### ot_nnd.py
 Get Nth nearest-neighbor distances from a set of 3-D coordinates. Can substitute for nearestneighbor.m.<br />
-First use: https://www.biorxiv.org/content/10.1101/######
+First use: https://www.biorxiv.org/content/10.1101/30297429
 
 ##### ot_rand3Dcoord_rect.py
 Generates a random distribution of points with a minimum inter-particle distance in a rectangular box.<br />
@@ -26,6 +26,10 @@ First use: https://www.ncbi.nlm.nih.gov/pubmed/30297429
 ##### ot_remap.py
 Creates a remapped model from a RELION subtomogram average. The algorithm is inefficient, so run on a machine with lots of cores and a fast SSD.<br />
 First use: https://www.ncbi.nlm.nih.gov/pubmed/29742050<br />
+
+##### ot_remap_v2.py
+Creates a remapped model from a RELION subtomogram average. The copying is done in memory, making this script much faster.<br />
+First use: https://www.ncbi.nlm.nih.gov/pubmed/40097852<br />
 
 ##### ot_rot-ps.py
 Rotational power spectrum analysis of a 2-D image.<br />
